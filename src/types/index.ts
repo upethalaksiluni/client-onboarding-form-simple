@@ -1,8 +1,9 @@
+
 export interface OnboardingFormData {
   fullName: string
   email: string
   companyName: string
-  services: string[]
+  services: ServiceOption[]
   budgetUsd?: number
   projectStartDate: string
   acceptTerms: boolean

@@ -1,0 +1,159 @@
+{
+
+  "info": {
+
+    "name": "Client Onboarding API",
+
+    "description": "Test collection for client onboarding form",
+
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+
+  },
+
+  "item": [
+
+    {
+
+      "name": "Submit Onboarding Form - Success",
+
+      "request": {
+
+        "method": "POST",
+
+        "header": [
+
+          {
+
+            "key": "Content-Type",
+
+            "value": "application/json"
+
+          }
+
+        ],
+
+        "body": {
+
+          "mode": "raw",
+
+          "raw": "{\n  \"fullName\": \"John Smith\",\n  \"email\": \"john.smith@techcorp.com\",\n  \"companyName\": \"TechCorp Solutions\",\n  \"services\": [\"UI/UX\", \"Web Dev\"],\n  \"budgetUsd\": 75000,\n  \"projectStartDate\": \"2025-10-01\",\n  \"acceptTerms\": true\n}"
+
+        },
+
+        "url": {
+
+          "raw": "{{baseUrl}}/api/onboard",
+
+          "host": ["{{baseUrl}}"],
+
+          "path": ["api", "onboard"]
+
+        }
+
+      },
+
+      "response": []
+
+    },
+
+    {
+
+      "name": "Submit Onboarding Form - Minimum Fields",
+
+      "request": {
+
+        "method": "POST",
+
+        "header": [
+
+          {
+
+            "key": "Content-Type", 
+
+            "value": "application/json"
+
+          }
+
+        ],
+
+        "body": {
+
+          "mode": "raw",
+
+          "raw": "{\n  \"fullName\": \"Jane Doe\",\n  \"email\": \"jane@startup.io\",\n  \"companyName\": \"Startup Inc\",\n  \"services\": [\"Branding\"],\n  \"projectStartDate\": \"2025-09-15\",\n  \"acceptTerms\": true\n}"
+
+        },
+
+        "url": {
+
+          "raw": "{{baseUrl}}/api/onboard",
+
+          "host": ["{{baseUrl}}"],
+
+          "path": ["api", "onboard"]
+
+        }
+
+      }
+
+    },
+
+    {
+
+      "name": "Submit Onboarding Form - All Services",
+
+      "request": {
+
+        "method": "POST",
+
+        "header": [
+
+          {
+
+            "key": "Content-Type",
+
+            "value": "application/json"
+
+          }
+
+        ],
+
+        "body": {
+
+          "mode": "raw",
+
+          "raw": "{\n  \"fullName\": \"Sarah Johnson\",\n  \"email\": \"sarah.johnson@enterprise.com\",\n  \"companyName\": \"Enterprise Solutions Ltd\",\n  \"services\": [\"UI/UX\", \"Branding\", \"Web Dev\", \"Mobile App\"],\n  \"budgetUsd\": 250000,\n  \"projectStartDate\": \"2025-11-01\",\n  \"acceptTerms\": true\n}"
+
+        },
+
+        "url": {
+
+          "raw": "{{baseUrl}}/api/onboard",
+
+          "host": ["{{baseUrl}}"],
+
+          "path": ["api", "onboard"]
+
+        }
+
+      }
+
+    }
+
+  ],
+
+  "variable": [
+
+    {
+
+      "key": "baseUrl",
+
+      "value": "https://example.com",
+
+      "type": "string"
+
+    }
+
+  ]
+
+} 

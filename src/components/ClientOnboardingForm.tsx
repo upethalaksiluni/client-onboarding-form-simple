@@ -11,6 +11,10 @@ import { Input } from '@/components/ui/Input'
 import { Label } from '@/components/ui/Label'
 import { Checkbox } from '@/components/ui/Checkbox'
 import { Alert, AlertDescription } from '@/components/ui/Alert'
+import { useFormProgress } from '@/hooks/useFormProgress'
+import { useAutoSave } from '@/hooks/useAutoSave'
+import { ProgressBar } from '@/components/ui/ProgressBar'
+import { BudgetSuggestions } from '@/components/BudgetSuggestions'
 
 export default function ClientOnboardingForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -25,6 +29,7 @@ export default function ClientOnboardingForm() {
     handleSubmit,
     control,
     setValue,
+    watch,
     formState: { errors },
     reset
   } = useForm<OnboardingFormData>({
@@ -34,6 +39,11 @@ export default function ClientOnboardingForm() {
       acceptTerms: true
     }
   })
+
+  const progress = useFormProgress(watch)
+  const { clearDraft } = useAutoSave(watch, setValue)
+
+  
 
   // Pre-fill from query parameters (bonus feature)
   useEffect(() => {
@@ -107,7 +117,10 @@ export default function ClientOnboardingForm() {
         </Alert>
       )}
 
-  <form onSubmit={handleSubmit(onSubmit as any)} className="space-y-4">
+      {/* Progress Bar */}
+      <ProgressBar progress={progress} className="mb-6" />
+
+      <form onSubmit={handleSubmit(onSubmit as any)} className="space-y-4">
         {/* Full Name */}
         <div>
           <Label htmlFor="fullName" className="block mb-2">
@@ -195,6 +208,10 @@ export default function ClientOnboardingForm() {
           <Label htmlFor="budgetUsd" className="block mb-2">
             Budget (USD)
           </Label>
+          <BudgetSuggestions 
+            selectedServices={watch('services') || []}
+            onBudgetSelect={(amount) => setValue('budgetUsd', amount)}
+          />
           <Input
             id="budgetUsd"
             type="number"
