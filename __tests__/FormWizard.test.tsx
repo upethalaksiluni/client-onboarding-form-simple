@@ -25,7 +25,7 @@ describe('FormWizard', () => {
     const nextButton = screen.getByText('Next Step')
     await user.click(nextButton)
     
-    // Should show validation errors and stay on step 1
+    // This test ensures that validation errors are shown and the step does not advance if required fields are missing.
     expect(screen.getByText('Full name is required')).toBeInTheDocument()
     expect(screen.getByText('Step 1 of 3')).toBeInTheDocument()
   })
